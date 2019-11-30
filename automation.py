@@ -6,5 +6,6 @@ sys.path.append('/home/kartik/PycharmProjects/SC/venv/circuitdescription')
 
 from circuitdescription import *
 fun_gen = function_generator()
+fun_gen.circuit_maker()
 
 
