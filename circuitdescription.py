@@ -6,18 +6,11 @@ class function_generator:
 
     def AND(self, outp, a, b):
         s.push(outp + "=" + a + "*" + b)
-        #if ((a == True) and (b == True)):
-        #    return True
-        #else:
-        #    return False
 
-    def OR(self, a, b):
-        if (a == True):
-            return True
-        elif (b == True):
-            return True
-        else:
-            return False
+
+    def OR(self, outp, a, b):
+        s.push(outp + "=" + a + "+" + b)
+
 
     def NOR(self, a, b):
         if (a == True):
@@ -27,32 +20,19 @@ class function_generator:
         else:
             return True
 
-    def XOR(self, a, b):
-        if (a != b):
-            return True
-        else:
-            return False
+    def XOR(self, outp, a, b):
+        s.push(outp + "=" + a + "+" + b)
 
-    def XNOR(self, a, b):
-        if (a == b):
-            return True
-        else:
-            return False
+    def XNOR(self, outp, a, b):
+        s.push(outp + "=" + a + "~" + b)
 
     def MUX(self, outp, a, b, c):
         if (c == 0.5):
             s.push(outp + "=" + "(" + a + "+" + b + ") / 2")
 
-        #if (c == 1):
-        #   return a
-        #else:
-        #    return b
 
-    def NOT(self, a):
-        if (a == True):
-            return False
-        else:
-            return True
+    def NOT(self, outp, a):
+        s.push(outp + "=" + "1" - "a")
 
     def NAND(self, a, b):
         if ((a == True) and (b == True)):
