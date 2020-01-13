@@ -62,14 +62,6 @@ class function_generator:
         print(out_str)
 
 
-
-
-
-
-
-
-
-
     def circuit_maker(self):
         #i1 = i2 = i3 = i4 = i5 = i6 = False
         self.AND("a1","i1", "i2")
