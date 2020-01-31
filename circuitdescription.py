@@ -40,7 +40,7 @@ class function_generator:
         else:
             return True
 
-    def circuit_function(self):
+    def circuit_function(self):                   ##function calculator for stochastic circuit
         pop_list = []
         while (s.isEmpty() == False):
             pop_list.append(s.pop())
@@ -57,7 +57,7 @@ class function_generator:
             if pop_list[i][0:j] in pop_list[0]:
                 out_str = pop_list[0].replace(pop_list[i][0:j], pop_list[i][j+1:])
                 pop_list[0] = out_str
-                print(out_str)
+                print(out_str)                     ##Stack implementation for backward calculation
             i = i + 1
         print(out_str)
 
