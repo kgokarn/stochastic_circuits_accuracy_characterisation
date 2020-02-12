@@ -44,7 +44,7 @@ class function_generator:
         pop_list = []
         while (s.isEmpty() == False):
             pop_list.append(s.pop())
-        print(pop_list)
+        ##print(pop_list)
         out_str = pop_list[0]
         length = len(pop_list)
         i = 1
@@ -57,9 +57,9 @@ class function_generator:
             if pop_list[i][0:j] in pop_list[0]:
                 out_str = pop_list[0].replace(pop_list[i][0:j], pop_list[i][j+1:])
                 pop_list[0] = out_str
-                print(out_str)                     ##Stack implementation for backward calculation
+                ##print(out_str)                     ##Stack implementation for backward calculation
             i = i + 1
-        print(out_str)
+        return out_str
 
 
     def circuit_maker(self):
@@ -69,5 +69,7 @@ class function_generator:
         self.AND("a3","i5", "i6")
         self.MUX("m1","a1", "a2", 0.5)
         self.MUX("m2","m1", "a3", 0.5)
-        self.circuit_function()
+        funct_expr = self.circuit_function()
+        print (funct_expr)
+        return funct_expr
 
