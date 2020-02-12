@@ -1,13 +1,14 @@
 import numpy as np
 
 class circuit_simulation:
-    def circuit(self, slength):
-        i1 = float(input("Enter the value for i1: "))
-        i2 = float(input("Enter the value for i2: "))
-        i3 = float(input("Enter the value for i3: "))
-        i4 = float(input("Enter the value for i4: "))
-        i5 = float(input("Enter the value for i5: "))
-        i6 = float(input("Enter the value for i6: "))
+    def circuit(self, slength, circuit_simulation_list):
+        ##i1 = float(input("Enter the value for i1: "))
+        ##i2 = float(input("Enter the value for i2: "))
+        ##i3 = float(input("Enter the value for i3: "))
+        ##i4 = float(input("Enter the value for i4: "))
+        ##i5 = float(input("Enter the value for i5: "))
+        ##i6 = float(input("Enter the value for i6: "))
+        i1 = i2 = i3 = i4 = i5 = i6 = 0.5
         i1_sn = self.SNG(i1, slength)
         i2_sn = self.SNG(i2, slength)
         i3_sn = self.SNG(i3, slength)
@@ -21,12 +22,12 @@ class circuit_simulation:
         m1 = self.MUX(a1, a2, 0.5, slength)
         m2 = self.MUX(m1, a3, 0.5, slength)
         stoc_output = self.COUNT(m2, slength)
-        print(stoc_output)
-        return stoc_output
+        circuit_simulation_list.append(stoc_output)
+        return circuit_simulation_list
 
 
-    def SNG(self, bin_num, slength):
-        ran_num = np.random.uniform(size=slength)
+    def SNG(self, bin_num, slength):                             ##Function for Stochastic Number Generator
+        ran_num = np.random.uniform(size=slength)                ##Uniform Distribution is used for random SN generator
         stoc_bitstream = []
         i = 0
         while(i < slength):
@@ -37,7 +38,7 @@ class circuit_simulation:
             i = i + 1
         return stoc_bitstream
 
-    def COUNT(self, a, slength):
+    def COUNT(self, a, slength):                                  ##Function of Counter implementation
         i = 0
         count = 0
         while(i < slength):
@@ -122,5 +123,12 @@ class circuit_simulation:
                     sum.append(b[j])
                 j = j + 1
         return sum
+
+    def mean_square_error(self, theoretical, simulation):
+        i1 = i2 = i3 = i4 = i5= i6 = 0.5
+        theoretical_value = eval(theoretical)
+        print(theoretical_value)
+
+
 
 
