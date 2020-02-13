@@ -50,7 +50,7 @@ class function_generator:
         i = 1
         while(i<length):
             if pop_list[i].find("=") != -1:
-                j = pop_list[i].find("=");
+                j = pop_list[i].find("=")
             else:
                 i = i + 1
                 continue
