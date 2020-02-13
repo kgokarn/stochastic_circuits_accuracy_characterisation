@@ -126,8 +126,35 @@ class circuit_simulation:
 
     def mean_square_error(self, theoretical, simulation):
         i1 = i2 = i3 = i4 = i5= i6 = 0.5
-        theoretical_value = eval(theoretical)
+        i = 0
+        j = 0
+        sum = 0
+        mse_list = []
+        if theoretical.find("=") != -1:
+            j = theoretical.find("=")
+
+        theoretical_rhs = theoretical[j+1:]
+        theoretical_value = (eval(theoretical_rhs))
         print(theoretical_value)
+
+        while(i < len(simulation)):
+            mse_list.append((theoretical_value - simulation[i])**2)
+            i = i + 1
+        print(mse_list)
+
+        while(j < len(mse_list)):
+            sum = sum + mse_list[j]
+            j = j + 1
+
+        mean_square_error = sum / len(mse_list)
+        return mean_square_error
+
+
+
+
+
+
+
 
 
 
