@@ -9,22 +9,17 @@ class function_generator:
 
 
     def OR(self, outp, a, b):
-        s.push(outp + "=" + a + "+" + b)
+        s.push(outp + "=" + a + "+" + b + "-" + a + "*" + b)
 
 
-    def NOR(self, a, b):
-        if (a == True):
-            return False
-        elif (b == True):
-            return False
-        else:
-            return True
+    def NOR(self, outp, a, b):
+        s.push(outp + "=" + "1" + "+" + a + "*" + b + "-(" + a + "+" + b + ")")
 
     def XOR(self, outp, a, b):
-        s.push(outp + "=" + a + "+" + b)
+        s.push(outp + "=" + a + "+" + b + "-" + "2" + "*" + a + "*" + b)
 
     def XNOR(self, outp, a, b):
-        s.push(outp + "=" + a + "~" + b)
+        s.push(outp + "=" + "1" + "+" + "2" + "*" + a + "*" + b + "-(" + a + "+" + b + ")")
 
     def MUX(self, outp, a, b, c):
         if (c == 0.5):
@@ -32,13 +27,11 @@ class function_generator:
 
 
     def NOT(self, outp, a):
-        s.push(outp + "=" + "1" - "a")
+        s.push(outp + "=" + "1" + "-" + a)
 
-    def NAND(self, a, b):
-        if ((a == True) and (b == True)):
-            return False
-        else:
-            return True
+    def NAND(self, outp, a, b):
+        s.push(outp + "=" + "1" + "-" + a + "*" + b)
+
 
     def circuit_function(self):                   ##function calculator for stochastic circuit
         pop_list = []
@@ -63,12 +56,103 @@ class function_generator:
 
 
     def circuit_maker(self):
-        #i1 = i2 = i3 = i4 = i5 = i6 = False
-        self.AND("a1","i1", "i2")
-        self.AND("a2","i3", "i4")
-        self.AND("a3","i5", "i6")
-        self.MUX("m1","a1", "a2", 0.5)
-        self.MUX("m2","m1", "a3", 0.5)
+        file_ptr = open("circuit_description.txt")
+        while file_ptr:
+            read_line = file_ptr.readline()
+            if "AND" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.strip(" ")
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("AND", "")
+                line_parser = line_parser.replace(" ", "")
+                self.AND(line_parser[0:2], line_parser[2:4], line_parser[4:6])
+                continue;
+
+            if "MUX" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("MUX", "")
+                line_parser = line_parser.replace(" ", "")
+                self.MUX(line_parser[0:2], line_parser[2:4], line_parser[4:6], 0.5)
+                continue;
+
+
+            if "OR" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.strip(" ")
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("OR", "")
+                line_parser = line_parser.replace(" ", "")
+                self.OR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
+                continue;
+
+            if "NAND" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.strip(" ")
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("NAND", "")
+                line_parser = line_parser.replace(" ", "")
+                self.NAND(line_parser[0:2], line_parser[2:4], line_parser[4:6])
+                continue;
+
+            if "NOR" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.strip(" ")
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("NOR", "")
+                line_parser = line_parser.replace(" ", "")
+                self.NOR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
+                continue;
+
+            if "XOR" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.strip(" ")
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("XOR", "")
+                line_parser = line_parser.replace(" ", "")
+                self.XOR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
+                continue;
+
+            if "XNOR" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.strip(" ")
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("XNOR", "")
+                line_parser = line_parser.replace(" ", "")
+                self.XNOR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
+                continue;
+
+            if "NOT" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.strip(" ")
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("NOT", "")
+                line_parser = line_parser.replace(" ", "")
+                self.NOT(line_parser[0:2], line_parser[2:4])
+                continue;
+
+            if "END" in read_line:
+                file_ptr.close()
+                break;
+
+
+
         funct_expr = self.circuit_function()
         print (funct_expr)
         return funct_expr
