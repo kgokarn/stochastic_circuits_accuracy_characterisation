@@ -1,0 +1,6 @@
+AND(a1, i1, i2)
+AND(a2, i3, i4)
+AND(a3, i5, i6)
+MUX(m1, a1, a2)
+MUX(m2, m1, a3)
+END
