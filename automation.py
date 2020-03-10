@@ -9,6 +9,8 @@ sys.path.append('/home/kartik/PycharmProjects/SC/venv/accuracy')
 from circuitdescription import *
 from simulation import*
 from accuracy import*
+#objects are created for python classes.
+#objects for circuit identification, simulation and accuracy
 fun_gen = function_generator()
 function_expression = fun_gen.circuit_maker()
 continuous_simulation = circuit_simulation()
@@ -16,7 +18,7 @@ acc_char = accuarcy_characterization()
 
 
 
-
+#To choose from either of the combinations
 print ("1 : Confidence Level and Error Tolerance is given\n"
        "2 : Confidence Level and Stochastic Number is given\n"
        "3 : Error Tolerance and Stochastic Number is given\n")
@@ -38,7 +40,7 @@ if(given_choice == '1'):
     print("circuit simulation result is: ",circuit_simulation_list)
     mean_square_error = continuous_simulation.mean_square_error(function_expression, circuit_simulation_list)
     print("Mean Square Error is: ", mean_square_error)
-    stoc_number = acc_char.calc_stochastic_number(conf_level, err_tolerance, mean_square_error)
+    stoc_number = acc_char.calc_stochastic_number(conf_level, err_tolerance, mean_square_error, num_simulation)
     print("stochastic number is: ", stoc_number)
 
 elif(given_choice == '2'):
@@ -51,7 +53,7 @@ elif(given_choice == '2'):
     print("circuit simulation result is: ",circuit_simulation_list)
     mean_square_error = continuous_simulation.mean_square_error(function_expression, circuit_simulation_list)
     print("Mean Square Error is: ", mean_square_error)
-    err_tolerance = acc_char.calc_error_tolerance(conf_level, stoc_number, mean_square_error)
+    err_tolerance = acc_char.calc_error_tolerance(conf_level, stoc_number, mean_square_error, num_simulation)
     print("error tolerance is: ", err_tolerance)
 
 elif(given_choice == '3'):
@@ -64,7 +66,7 @@ elif(given_choice == '3'):
     print("circuit simulation result is: ",circuit_simulation_list)
     mean_square_error = continuous_simulation.mean_square_error(function_expression, circuit_simulation_list)
     print("Mean Square Error is: ", mean_square_error)
-    conf_level = acc_char.calc_confidence_level(err_tolerance, stoc_number, mean_square_error)
+    conf_level = acc_char.calc_confidence_level(err_tolerance, stoc_number, mean_square_error, num_simulation)
     print("confidence level is: ", conf_level)
 
 else:
