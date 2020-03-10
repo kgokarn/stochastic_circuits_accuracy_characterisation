@@ -1,35 +1,37 @@
 import pythonds.basic
 from pythonds.basic.stack import *
 
+#Stack for pushing the expression of the gates.
 s = Stack()
+
 class function_generator:
 
-    def AND(self, outp, a, b):
+    def AND(self, outp, a, b):                                              #Function for AND gate
         s.push(outp + "=" + a + "*" + b)
 
 
-    def OR(self, outp, a, b):
+    def OR(self, outp, a, b):                                               #Function for OR gate
         s.push(outp + "=" + a + "+" + b + "-" + a + "*" + b)
 
 
-    def NOR(self, outp, a, b):
+    def NOR(self, outp, a, b):                                              #Function for NOR gate
         s.push(outp + "=" + "1" + "+" + a + "*" + b + "-(" + a + "+" + b + ")")
 
-    def XOR(self, outp, a, b):
+    def XOR(self, outp, a, b):                                              #Function for XOR gate
         s.push(outp + "=" + a + "+" + b + "-" + "2" + "*" + a + "*" + b)
 
-    def XNOR(self, outp, a, b):
+    def XNOR(self, outp, a, b):                                             #Function for XNOR gate
         s.push(outp + "=" + "1" + "+" + "2" + "*" + a + "*" + b + "-(" + a + "+" + b + ")")
 
     def MUX(self, outp, a, b, c):
-        if (c == 0.5):
+        if (c == 0.5):                                                      #Function for MUX
             s.push(outp + "=" + "(" + a + "+" + b + ") / 2")
 
 
-    def NOT(self, outp, a):
+    def NOT(self, outp, a):                                                 #Function for NOT gate
         s.push(outp + "=" + "1" + "-" + a)
 
-    def NAND(self, outp, a, b):
+    def NAND(self, outp, a, b):                                             #Function for NAND gate
         s.push(outp + "=" + "1" + "-" + a + "*" + b)
 
 
@@ -56,7 +58,7 @@ class function_generator:
 
 
     def circuit_maker(self):
-        file_ptr = open("circuit_description.txt")
+        file_ptr = open("circuit_description.txt")                 #Circuit Description file is parson here
         while file_ptr:
             read_line = file_ptr.readline()
             if "AND" in read_line:
