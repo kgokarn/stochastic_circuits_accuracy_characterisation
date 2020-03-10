@@ -2,13 +2,7 @@ import numpy as np
 
 class circuit_simulation:
     def circuit(self, slength, circuit_simulation_list):
-        ##i1 = float(input("Enter the value for i1: "))
-        ##i2 = float(input("Enter the value for i2: "))
-        ##i3 = float(input("Enter the value for i3: "))
-        ##i4 = float(input("Enter the value for i4: "))
-        ##i5 = float(input("Enter the value for i5: "))
-        ##i6 = float(input("Enter the value for i6: "))
-        input_output_dictionary = {}
+        input_output_dictionary = {}                                     #Inputs read from file are maintained in dictionary
         input_read_line = open("input.txt")
 
         while input_read_line:
@@ -26,23 +20,8 @@ class circuit_simulation:
                 input_read_line.close()
                 break;
 
-        #print("input_output_dictionary =", input_output_dictionary)
-        # i1 = i2 = i3 = i4 = i5 = i6 = 0.5
-        # i1 = self.SNG(i1, slength)
-        # i2 = self.SNG(i2, slength)
-        # i3 = self.SNG(i3, slength)
-        # i4 = self.SNG(i4, slength)
-        # i5 = self.SNG(i5, slength)
-        # i6 = self.SNG(i6, slength)
-        # print("i1, i2 = ", type(i1), type(i2))
 
-        #a1 = self.AND(i1, i2)
-        #a2 = self.AND(i3, i4)
-        #a3 = self.AND(i5, i6)
-        #m1 = self.MUX(a1, a2, 0.5, slength)
-        #m2 = self.MUX(m1, a3, 0.5, slength)
-
-        ckt_ptr = open("circuit_description.txt")
+        ckt_ptr = open("circuit_description.txt")                          #Circuit read from the file for simulation
         while ckt_ptr:
             read_line = ckt_ptr.readline()
             if "AND" in read_line:
@@ -255,12 +234,12 @@ class circuit_simulation:
                 j = j + 1
         return sum
 
-    def mean_square_error(self, theoretical, simulation):
+    def mean_square_error(self, theoretical, simulation):                   #Calculation of Mean Square Error
         input_read_line = open("input.txt")
         probablity_input_output_dictionary = {}
         variable_dictionary = {}
         variable_count = 0
-        while input_read_line:
+        while input_read_line:                                              #Input file parsing for theortical output value
             input_line = input_read_line.readline()
             if "=" in input_line:
                 input_parser = input_line
