@@ -36,11 +36,10 @@ class function_generator:
 
 
     def circuit_function(self):                   ##function calculator for stochastic circuit
-        pop_list = []
+        pop_list = []                             ##Expressions removed from Stack will be stored in pop_list
         while (s.isEmpty() == False):
             pop_list.append(s.pop())
-        ##print(pop_list)
-        out_str = pop_list[0]
+        out_str = pop_list[0]                     ##First Element will  contain final expression
         length = len(pop_list)
         i = 1
         while(i<length):
@@ -52,48 +51,15 @@ class function_generator:
             if pop_list[i][0:j] in pop_list[0]:
                 out_str = pop_list[0].replace(pop_list[i][0:j], pop_list[i][j+1:])
                 pop_list[0] = out_str
-                ##print(out_str)                     ##Stack implementation for backward calculation
+                                                  ##Stack implementation for backward calculation
             i = i + 1
         return out_str
 
 
     def circuit_maker(self):
-        file_ptr = open("circuit_description.txt")                 #Circuit Description file is parson here
+        file_ptr = open("circuit_description.txt")                 #Circuit Description file is parsed here
         while file_ptr:
             read_line = file_ptr.readline()
-            if "AND" in read_line:
-                line_parser = read_line
-                line_parser = line_parser.strip(" ")
-                line_parser = line_parser.replace(",", "")
-                line_parser = line_parser.replace("(", "")
-                line_parser = line_parser.replace(")", "")
-                line_parser = line_parser.replace("AND", "")
-                line_parser = line_parser.replace(" ", "")
-                self.AND(line_parser[0:2], line_parser[2:4], line_parser[4:6])
-                continue;
-
-            if "MUX" in read_line:
-                line_parser = read_line
-                line_parser = line_parser.replace(",", "")
-                line_parser = line_parser.replace("(", "")
-                line_parser = line_parser.replace(")", "")
-                line_parser = line_parser.replace("MUX", "")
-                line_parser = line_parser.replace(" ", "")
-                self.MUX(line_parser[0:2], line_parser[2:4], line_parser[4:6], 0.5)
-                continue;
-
-
-            if "OR" in read_line:
-                line_parser = read_line
-                line_parser = line_parser.strip(" ")
-                line_parser = line_parser.replace(",", "")
-                line_parser = line_parser.replace("(", "")
-                line_parser = line_parser.replace(")", "")
-                line_parser = line_parser.replace("OR", "")
-                line_parser = line_parser.replace(" ", "")
-                self.OR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
-                continue;
-
             if "NAND" in read_line:
                 line_parser = read_line
                 line_parser = line_parser.strip(" ")
@@ -105,15 +71,26 @@ class function_generator:
                 self.NAND(line_parser[0:2], line_parser[2:4], line_parser[4:6])
                 continue;
 
-            if "NOR" in read_line:
+            if "AND" in read_line:
                 line_parser = read_line
                 line_parser = line_parser.strip(" ")
                 line_parser = line_parser.replace(",", "")
                 line_parser = line_parser.replace("(", "")
                 line_parser = line_parser.replace(")", "")
-                line_parser = line_parser.replace("NOR", "")
+                line_parser = line_parser.replace("AND", "")
                 line_parser = line_parser.replace(" ", "")
-                self.NOR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
+                self.AND(line_parser[0:2], line_parser[2:4], line_parser[4:6])
+                continue;
+
+            if "XNOR" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.strip(" ")
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("XNOR", "")
+                line_parser = line_parser.replace(" ", "")
+                self.XNOR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
                 continue;
 
             if "XOR" in read_line:
@@ -127,15 +104,36 @@ class function_generator:
                 self.XOR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
                 continue;
 
-            if "XNOR" in read_line:
+            if "NOR" in read_line:
                 line_parser = read_line
                 line_parser = line_parser.strip(" ")
                 line_parser = line_parser.replace(",", "")
                 line_parser = line_parser.replace("(", "")
                 line_parser = line_parser.replace(")", "")
-                line_parser = line_parser.replace("XNOR", "")
+                line_parser = line_parser.replace("NOR", "")
                 line_parser = line_parser.replace(" ", "")
-                self.XNOR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
+                self.NOR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
+                continue;
+
+            if "MUX" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("MUX", "")
+                line_parser = line_parser.replace(" ", "")
+                self.MUX(line_parser[0:2], line_parser[2:4], line_parser[4:6], 0.5)
+                continue;
+
+            if "OR" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.strip(" ")
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("OR", "")
+                line_parser = line_parser.replace(" ", "")
+                self.OR(line_parser[0:2], line_parser[2:4], line_parser[4:6])
                 continue;
 
             if "NOT" in read_line:
