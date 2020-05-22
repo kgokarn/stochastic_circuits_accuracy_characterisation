@@ -24,40 +24,16 @@ class circuit_simulation:
         ckt_ptr = open("circuit_description.txt")                          #Circuit read from the file for simulation
         while ckt_ptr:
             read_line = ckt_ptr.readline()
-            if "AND" in read_line:
+            if "XNOR" in read_line:
                 line_parser = read_line
                 line_parser = line_parser.strip(" ")
                 line_parser = line_parser.replace(",", "")
                 line_parser = line_parser.replace("(", "")
                 line_parser = line_parser.replace(")", "")
-                line_parser = line_parser.replace("AND", "")
+                line_parser = line_parser.replace("XNOR", "")
                 line_parser = line_parser.replace(" ", "")
-                line_parser_temp = self.AND(input_output_dictionary.get(line_parser[2:4]), input_output_dictionary.get(line_parser[4:6]))
-                input_output_dictionary[line_parser[0:2]] = line_parser_temp
-                computed_output = line_parser_temp
-                continue;
-
-            if "MUX" in read_line:
-                line_parser = read_line
-                line_parser = line_parser.replace(",", "")
-                line_parser = line_parser.replace("(", "")
-                line_parser = line_parser.replace(")", "")
-                line_parser = line_parser.replace("MUX", "")
-                line_parser = line_parser.replace(" ", "")
-                line_parser_temp = self.MUX(input_output_dictionary.get(line_parser[2:4]), input_output_dictionary.get(line_parser[4:6]), 0.5, slength)
-                input_output_dictionary[line_parser[0:2]] = line_parser_temp
-                computed_output = line_parser_temp
-                continue;
-
-            if "OR" in read_line:
-                line_parser = read_line
-                line_parser = line_parser.strip(" ")
-                line_parser = line_parser.replace(",", "")
-                line_parser = line_parser.replace("(", "")
-                line_parser = line_parser.replace(")", "")
-                line_parser = line_parser.replace("OR", "")
-                line_parser = line_parser.replace(" ", "")
-                line_parser_temp = self.OR(input_output_dictionary.get(line_parser[2:4]), input_output_dictionary.get(line_parser[4:6]))
+                line_parser_temp = self.XNOR(input_output_dictionary.get(line_parser[2:4]),
+                                             input_output_dictionary.get(line_parser[4:6]))
                 input_output_dictionary[line_parser[0:2]] = line_parser_temp
                 computed_output = line_parser_temp
                 continue;
@@ -70,20 +46,22 @@ class circuit_simulation:
                 line_parser = line_parser.replace(")", "")
                 line_parser = line_parser.replace("NAND", "")
                 line_parser = line_parser.replace(" ", "")
-                line_parser_temp = self.NAND(input_output_dictionary.get(line_parser[2:4]), input_output_dictionary.get(line_parser[4:6]))
+                line_parser_temp = self.NAND(input_output_dictionary.get(line_parser[2:4]),
+                                             input_output_dictionary.get(line_parser[4:6]))
                 input_output_dictionary[line_parser[0:2]] = line_parser_temp
                 computed_output = line_parser_temp
                 continue;
 
-            if "NOR" in read_line:
+            if "AND" in read_line:
                 line_parser = read_line
                 line_parser = line_parser.strip(" ")
                 line_parser = line_parser.replace(",", "")
                 line_parser = line_parser.replace("(", "")
                 line_parser = line_parser.replace(")", "")
-                line_parser = line_parser.replace("NOR", "")
+                line_parser = line_parser.replace("AND", "")
                 line_parser = line_parser.replace(" ", "")
-                line_parser_temp = self.NOR(input_output_dictionary.get(line_parser[2:4]), input_output_dictionary.get(line_parser[4:6]))
+                line_parser_temp = self.AND(input_output_dictionary.get(line_parser[2:4]),
+                                            input_output_dictionary.get(line_parser[4:6]))
                 input_output_dictionary[line_parser[0:2]] = line_parser_temp
                 computed_output = line_parser_temp
                 continue;
@@ -96,20 +74,49 @@ class circuit_simulation:
                 line_parser = line_parser.replace(")", "")
                 line_parser = line_parser.replace("XOR", "")
                 line_parser = line_parser.replace(" ", "")
-                line_parser_temp = self.XOR(input_output_dictionary.get(line_parser[2:4]), input_output_dictionary.get(line_parser[4:6]))
+                line_parser_temp = self.XOR(input_output_dictionary.get(line_parser[2:4]),
+                                            input_output_dictionary.get(line_parser[4:6]))
                 input_output_dictionary[line_parser[0:2]] = line_parser_temp
                 computed_output = line_parser_temp
                 continue;
 
-            if "XNOR" in read_line:
+            if "NOR" in read_line:
                 line_parser = read_line
                 line_parser = line_parser.strip(" ")
                 line_parser = line_parser.replace(",", "")
                 line_parser = line_parser.replace("(", "")
                 line_parser = line_parser.replace(")", "")
-                line_parser = line_parser.replace("XNOR", "")
+                line_parser = line_parser.replace("NOR", "")
                 line_parser = line_parser.replace(" ", "")
-                line_parser_temp = self.XNOR(input_output_dictionary.get(line_parser[2:4]), input_output_dictionary.get(line_parser[4:6]))
+                line_parser_temp = self.NOR(input_output_dictionary.get(line_parser[2:4]),
+                                            input_output_dictionary.get(line_parser[4:6]))
+                input_output_dictionary[line_parser[0:2]] = line_parser_temp
+                computed_output = line_parser_temp
+                continue;
+
+            if "MUX" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("MUX", "")
+                line_parser = line_parser.replace(" ", "")
+                line_parser_temp = self.MUX(input_output_dictionary.get(line_parser[2:4]),
+                                            input_output_dictionary.get(line_parser[4:6]), 0.5, slength)
+                input_output_dictionary[line_parser[0:2]] = line_parser_temp
+                computed_output = line_parser_temp
+                continue;
+
+            if "OR" in read_line:
+                line_parser = read_line
+                line_parser = line_parser.strip(" ")
+                line_parser = line_parser.replace(",", "")
+                line_parser = line_parser.replace("(", "")
+                line_parser = line_parser.replace(")", "")
+                line_parser = line_parser.replace("OR", "")
+                line_parser = line_parser.replace(" ", "")
+                line_parser_temp = self.OR(input_output_dictionary.get(line_parser[2:4]),
+                                           input_output_dictionary.get(line_parser[4:6]))
                 input_output_dictionary[line_parser[0:2]] = line_parser_temp
                 computed_output = line_parser_temp
                 continue;
@@ -126,7 +133,6 @@ class circuit_simulation:
                 input_output_dictionary[line_parser[0:2]] = line_parser_temp
                 computed_output = line_parser_temp
                 continue;
-
             if "END" in read_line:
                 ckt_ptr.close()
                 break;
@@ -261,6 +267,7 @@ class circuit_simulation:
         #i1 = i2 = i3 = i4 = i5= i6 = 0.5
         i = 0
         j = 0
+        k = 0
         sum = 0
         mse_list = []
         if theoretical.find("=") != -1:
@@ -270,14 +277,15 @@ class circuit_simulation:
         theoretical_value = (eval(theoretical_rhs))
         print("theoretical value = ", theoretical_value)
 
-        while(i < len(simulation)):
+        while(i < len(simulation)):                                    ##Calculation of deviation between actual and simulation value.
             mse_list.append((theoretical_value - simulation[i])**2)
             i = i + 1
-        print(mse_list)
+        print("deviation in each run",mse_list)
 
-        while(j < len(mse_list)):
-            sum = sum + mse_list[j]
-            j = j + 1
+
+        while(k < len(mse_list)):
+            sum = sum + mse_list[k]
+            k = k + 1
 
         mean_square_error = sum / len(mse_list)
         return mean_square_error
